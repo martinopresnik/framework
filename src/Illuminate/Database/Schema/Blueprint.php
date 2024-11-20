@@ -71,6 +71,12 @@ class Blueprint
      * @var bool
      */
     public $temporary = false;
+    
+    /**
+     * Alter online table. Used in mysql and mariadb to prevent table locks in production.
+     * @var boolean
+     */
+    public $online = false;
 
     /**
      * The column to add new columns after.

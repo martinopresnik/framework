@@ -307,7 +307,8 @@ class MySqlGrammar extends Grammar
      */
     public function compileAdd(Blueprint $blueprint, Fluent $command)
     {
-        return sprintf('alter table %s add %s',
+        $online = $blueprint->online ? ' online ' : '';
+        return sprintf('alter ' . $online . ' table %s add %s',
             $this->wrapTable($blueprint),
             $this->getColumn($blueprint, $command->column)
         );

@@ -307,8 +307,7 @@ class MySqlGrammar extends Grammar
      */
     public function compileAdd(Blueprint $blueprint, Fluent $command)
     {
-        $online = $blueprint->online ? ' online ' : '';
-        return sprintf('alter ' . $online . ' table %s add %s',
+        return sprintf('alter table %s add %s',
             $this->wrapTable($blueprint),
             $this->getColumn($blueprint, $command->column)
         );
@@ -492,7 +491,8 @@ class MySqlGrammar extends Grammar
      */
     protected function compileKey(Blueprint $blueprint, Fluent $command, $type)
     {
-        return sprintf('alter table %s add %s %s%s(%s)',
+        $online = $blueprint->online ? ' online ' : ' ';
+        return sprintf('alter' . $online . 'table %s add %s %s%s(%s)',
             $this->wrapTable($blueprint),
             $type,
             $this->wrap($command->index),
